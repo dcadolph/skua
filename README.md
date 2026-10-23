@@ -2,19 +2,18 @@
 
 # skua
 
-Your fowl-weather friend. A faster, cheaper, sharper take on weather, with a bird
-that reads your day and a price the big apps will hate.
+Your fowl-weather friend. A faster, sharper take on weather, with a bird that
+reads your day. Free, with no ads and no paid tier.
 
-skua wraps real forecast data in a clean, modern client and an AI voice with
-attitude. It leads on the web and grows to native clients, and it charges a
-fraction of what the incumbents ask.
+skua wraps real forecast data in a clean, modern client and an optional AI voice
+with attitude. It leads on the web and grows to native clients.
 
 ## Why
 
-Weather data is nearly free at small scale. The premium weather apps are not
-charging for data, they are charging for polish and personality. Both are
-reproducible. skua pairs a gorgeous client with a context-aware voice and a
-plugin model, at a price that undercuts the field.
+Weather data is nearly free at small scale. The premium weather apps charge for
+polish and personality, and both are reproducible. skua pairs a clean client
+with a context-aware voice and a plugin model, and gives all of it away under
+Apache 2.0.
 
 ## Architecture
 
