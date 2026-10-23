@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- tail -->
+  <path d="M150 330 L70 300 L85 340 L60 370 L150 360 Z" fill="#4E3626"/>
+  <!-- body -->
+  <ellipse cx="250" cy="320" rx="125" ry="112" fill="#6B4A35"/>
+  <ellipse cx="275" cy="345" rx="80" ry="72" fill="#C9A27E"/>
+  <!-- back wing -->
+  <ellipse cx="190" cy="315" rx="58" ry="88" transform="rotate(-25 190 315)" fill="#553A28"/>
+  <path d="M150 360 Q170 395 205 400" stroke="#3E2A1D" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- legs -->
+  <path d="M235 425 L230 462 M290 425 L295 462" stroke="#222" stroke-width="9" stroke-linecap="round"/>
+  <path d="M205 468 L230 456 L255 468 Z M270 468 L295 456 L320 468 Z" fill="#222" stroke="#222" stroke-width="6" stroke-linejoin="round"/>
+  <!-- head -->
+  <circle cx="300" cy="185" r="80" fill="#6B4A35"/>
+  <ellipse cx="335" cy="215" rx="34" ry="22" fill="#F28CA0" opacity="0.55"/>
+  <!-- beak -->
+  <path d="M362 180 L428 192 Q442 202 428 216 L420 208 Q400 214 365 210 Z" fill="#2A2A2A"/>
+  <path d="M366 196 L420 200" stroke="#555" stroke-width="3"/>
+  <!-- shades -->
+  <rect x="290" y="155" width="56" height="28" rx="10" fill="#111"/>
+  <path d="M250 160 L292 164" stroke="#111" stroke-width="5"/>
+  <path d="M300 163 L316 163" stroke="#FFFFFF" stroke-width="3" opacity="0.6"/>
+  <!-- backwards cap -->
+  <path d="M232 145 Q240 92 300 100 Q350 104 365 140 Q300 120 232 145 Z" fill="#2D7FF9"/>
+  <path d="M232 145 Q205 150 192 132 Q215 125 240 132 Z" fill="#1D5FC4"/>
+  <!-- cigar -->
+  <rect x="398" y="208" width="46" height="11" rx="4" fill="#7A4A22" transform="rotate(12 398 208)"/>
+  <circle cx="447" cy="225" r="5" fill="#FF7A1A"/>
+  <path d="M452 215 Q445 195 460 182 Q475 168 465 148" stroke="#BBBBBB" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- bow tie -->
+  <path d="M268 262 L240 248 L240 280 Z M268 262 L296 248 L296 280 Z" fill="#111"/>
+  <circle cx="268" cy="264" r="7" fill="#333"/>
+  <!-- front wing with a beer -->
+  <path d="M330 300 Q395 290 410 245 Q420 262 405 300 Q380 335 330 335 Z" fill="#553A28"/>
+  <rect x="398" y="215" width="42" height="72" rx="6" fill="#F2B233" stroke="#FFFFFF" stroke-width="3"/>
+  <path d="M396 215 Q405 196 418 208 Q428 192 442 214 Z" fill="#FFFFFF"/>
+  <path d="M440 232 Q462 236 460 254 Q458 270 440 270" stroke="#FFFFFF" stroke-width="6" fill="none"/>
+</svg>

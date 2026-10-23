@@ -1,0 +1,28 @@
+# Binaries
+/skua
+*.exe
+
+# Test and coverage output
+*.out
+coverage.*
+
+# Editors
+.idea/
+.vscode/
+.DS_Store
+
+# Go
+/vendor/
+
+# Xcode build output.
+ios/build/
+ios/build-sim/
+skua-server
+skua-server.log
+
+# Generated Xcode project (xcodegen owns project.yml).
+ios/*.xcodeproj/
+ios/build-device/
+
+# gomobile-bound framework (a build product).
+Frameworks/

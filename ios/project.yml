@@ -1,0 +1,96 @@
+# XcodeGen manifest. Regenerate the project any time with: xcodegen generate
+name: Skua
+options:
+  bundleIdPrefix: com.douglasadolph
+  deploymentTarget:
+    iOS: "17.0"
+targets:
+  Skua:
+    type: application
+    platform: iOS
+    sources:
+      - Skua
+    info:
+      path: Skua/Info.plist
+      properties:
+        CFBundleDisplayName: Skua
+        UILaunchScreen: {}
+        UIUserInterfaceStyle: Dark
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        NSLocationWhenInUseUsageDescription: Skua uses your location to show the weather where you are.
+        NSCalendarsUsageDescription: Skua reads your calendar to weather-check your day and flag events the sky will mess with.
+        NSCalendarsFullAccessUsageDescription: Skua reads your calendar to weather-check your day and flag events the sky will mess with.
+        CFBundleIcons:
+          CFBundleAlternateIcons:
+            Bolt:
+              CFBundleIconFiles: [Bolt]
+            Ember:
+              CFBundleIconFiles: [Ember]
+        UIBackgroundModes: [fetch]
+        BGTaskSchedulerPermittedIdentifiers: [com.douglasadolph.skua.refresh]
+    settings:
+      base:
+        MARKETING_VERSION: 0.23.0
+        CURRENT_PROJECT_VERSION: 1
+        TARGETED_DEVICE_FAMILY: 1
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ${SKUA_DEV_TEAM}
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        SWIFT_VERSION: "5.9"
+        CODE_SIGN_ENTITLEMENTS: Skua/Skua.entitlements
+    scheme:
+      testTargets:
+        - SkuaTests
+    dependencies:
+      - target: SkuaWidgets
+        embed: true
+      - framework: Frameworks/SkuaCore.xcframework
+        embed: true
+        codeSign: true
+  SkuaWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - SkuaWidgets
+      - Skua/Models.swift
+      - Skua/SkuaClient.swift
+      - Skua/WeatherKitProvider.swift
+      - Skua/SharedStore.swift
+      - Skua/Theme.swift
+      - Skua/Occasion.swift
+      - Skua/FlightPlanModel.swift
+    info:
+      path: SkuaWidgets/Info.plist
+      properties:
+        CFBundleDisplayName: Skua
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglasadolph.Skua.Widgets
+        MARKETING_VERSION: 0.23.0
+        CURRENT_PROJECT_VERSION: 1
+        TARGETED_DEVICE_FAMILY: 1
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ${SKUA_DEV_TEAM}
+        SWIFT_VERSION: "5.9"
+        CODE_SIGN_ENTITLEMENTS: SkuaWidgets/SkuaWidgets.entitlements
+    dependencies:
+      - framework: Frameworks/SkuaCore.xcframework
+        embed: false
+  SkuaTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - SkuaTests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglasadolph.SkuaTests
+        TARGETED_DEVICE_FAMILY: 1
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ${SKUA_DEV_TEAM}
+        SWIFT_VERSION: "5.9"
+    dependencies:
+      - target: Skua

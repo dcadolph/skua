@@ -1,0 +1,87 @@
+:root {
+	/* Storm defaults. The theme store overrides these at runtime. */
+	--ground: #06070b;
+	--surface: #0e1119;
+	--elevated: #161b26;
+	--text: #edf1f8;
+	--muted: #8792a6;
+	--accent: #ff7f32;
+	--accent-ink: #180b02;
+	--hair: rgba(202, 204, 210, 0.12);
+	--serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+	--sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: var(--sans);
+	background: var(--ground);
+	background-image: radial-gradient(
+		1100px 520px at 50% -140px,
+		color-mix(in srgb, var(--accent) 7%, transparent),
+		transparent 70%
+	);
+	background-repeat: no-repeat;
+	color: var(--text);
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	transition:
+		background 0.3s ease,
+		color 0.3s ease;
+}
+
+/* Panels rise into place on load, staggered down the page. */
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.grid > * {
+	animation: rise 0.32s ease-out both;
+}
+
+.grid > *:nth-child(2) {
+	animation-delay: 45ms;
+}
+
+.grid > *:nth-child(3) {
+	animation-delay: 90ms;
+}
+
+.grid > *:nth-child(4) {
+	animation-delay: 135ms;
+}
+
+.grid > *:nth-child(5) {
+	animation-delay: 180ms;
+}
+
+.grid > *:nth-child(6) {
+	animation-delay: 225ms;
+}
+
+.grid > *:nth-child(n + 7) {
+	animation-delay: 270ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.grid > * {
+		animation: none;
+	}
+}

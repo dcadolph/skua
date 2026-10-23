@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- confetti -->
+  <g opacity="0.9">
+    <rect x="60" y="80" width="14" height="6" fill="#FF3E9E" transform="rotate(30 60 80)"/>
+    <rect x="440" y="60" width="14" height="6" fill="#F5C84C" transform="rotate(-20 440 60)"/>
+    <rect x="80" y="430" width="14" height="6" fill="#B06CFF" transform="rotate(50 80 430)"/>
+    <rect x="460" y="420" width="14" height="6" fill="#3EE0C8" transform="rotate(10 460 420)"/>
+    <circle cx="120" cy="60" r="5" fill="#3EE0C8"/><circle cx="400" cy="30" r="5" fill="#FF3E9E"/>
+    <circle cx="40" cy="250" r="5" fill="#F5C84C"/><circle cx="480" cy="300" r="5" fill="#B06CFF"/>
+  </g>
+  <!-- veil, knocked sideways -->
+  <path d="M250 120 Q170 100 120 160 Q80 220 50 260 Q120 250 170 270 Q190 190 255 150 Z" fill="#FFFFFF" opacity="0.55"/>
+  <!-- tail -->
+  <path d="M150 330 L70 300 L85 340 L60 370 L150 360 Z" fill="#4E3626"/>
+  <!-- body -->
+  <ellipse cx="250" cy="320" rx="125" ry="112" fill="#6B4A35"/>
+  <ellipse cx="275" cy="345" rx="80" ry="72" fill="#C9A27E"/>
+  <!-- back wing -->
+  <ellipse cx="190" cy="315" rx="58" ry="88" transform="rotate(-25 190 315)" fill="#553A28"/>
+  <path d="M150 360 Q170 395 205 400" stroke="#3E2A1D" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- legs -->
+  <path d="M235 425 L230 462 M290 425 L295 462" stroke="#222" stroke-width="9" stroke-linecap="round"/>
+  <path d="M205 468 L230 456 L255 468 Z M270 468 L295 456 L320 468 Z" fill="#222" stroke="#222" stroke-width="6" stroke-linejoin="round"/>
+  <!-- head -->
+  <circle cx="300" cy="185" r="80" fill="#6B4A35"/>
+  <ellipse cx="335" cy="215" rx="34" ry="22" fill="#F28CA0" opacity="0.55"/>
+  <!-- beak -->
+  <path d="M362 180 L428 192 Q442 202 428 216 L420 208 Q400 214 365 210 Z" fill="#2A2A2A"/>
+  <path d="M366 196 L420 200" stroke="#555" stroke-width="3"/>
+  <!-- garter -->
+  <path d="M220 432 Q235 424 250 432" stroke="#FF3E9E" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M218 428 Q235 444 252 428" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-dasharray="4 4"/>
+  <!-- heart sunglasses -->
+  <path d="M296 165 C296 150 316 148 320 162 C324 148 344 150 344 165 C344 180 320 192 320 196 C320 192 296 180 296 165 Z" fill="#FF3E9E" stroke="#1B1B1B" stroke-width="3"/>
+  <path d="M248 160 L296 162" stroke="#1B1B1B" stroke-width="4"/>
+  <path d="M308 160 Q312 156 316 160" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.8"/>
+  <!-- lipstick kisses -->
+  <g fill="#E0115F" opacity="0.9">
+    <path d="M235 215 Q242 205 249 213 Q256 205 263 215 Q249 224 235 215 Z"/>
+    <path d="M236 216 Q249 232 262 216 Q249 222 236 216 Z"/>
+    <path d="M168 300 Q175 290 182 298 Q189 290 196 300 Q182 309 168 300 Z" transform="rotate(-20 182 300)"/>
+    <path d="M169 301 Q182 317 195 301 Q182 307 169 301 Z" transform="rotate(-20 182 300)"/>
+  </g>
+  <!-- tongue out -->
+  <path d="M390 212 Q396 232 384 236 Q374 232 378 212 Z" fill="#FF6F91"/>
+  <!-- sash -->
+  <path d="M175 250 L205 230 L355 400 L325 420 Z" fill="#111111"/>
+  <text x="0" y="0" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="24" fill="#FF3E9E" transform="translate(208 262) rotate(48)" letter-spacing="1">LAST FLING</text>
+  <!-- front wing with cocktail and a very rude straw -->
+  <path d="M330 300 Q395 290 410 245 Q420 262 405 300 Q380 335 330 335 Z" fill="#553A28"/>
+    <circle cx="452" cy="220" r="12" fill="#F5C84C"/>
+  <g transform="rotate(-14 420 260)">
+    <rect x="416" y="160" width="8" height="120" fill="#FF3E9E"/>
+    <circle cx="410" cy="160" r="13" fill="#FF3E9E"/>
+    <circle cx="430" cy="160" r="13" fill="#FF3E9E"/>
+    <rect x="410" y="92" width="20" height="66" rx="10" fill="#FF3E9E"/>
+    <ellipse cx="420" cy="92" rx="14" ry="15" fill="#FF6FB5"/>
+    <path d="M407 100 Q420 108 433 100" stroke="#C2186B" stroke-width="3" fill="none"/>
+  </g>
+  <path d="M380 220 L460 220 L445 290 L395 290 Z" fill="#FF8CC6" opacity="0.85" stroke="#FFFFFF" stroke-width="3"/>
+</svg>
