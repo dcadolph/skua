@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skua Privacy</title>
+<meta name="description" content="What the Skua weather app sends, and to whom.">
+<link rel="icon" href="skua-logo.png">
+<link rel="apple-touch-icon" href="skua-logo.png">
+<style>
+  :root {
+    --bg: #060709;
+    --bg-glow: #12141a;
+    --fg: #eef1f4;
+    --mist: #aab1ba;
+    --dim: #8a919b;
+    --bolt: #ff7f32;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f5f7;
+      --bg-glow: #ffffff;
+      --fg: #17181c;
+      --mist: #454a52;
+      --dim: #626872;
+      --bolt: #c4520f;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 4rem 16px 6rem;
+    background: var(--bg);
+    background-image: radial-gradient(ellipse 90% 40rem at 50% 0%, var(--bg-glow), var(--bg) 70%);
+    background-repeat: no-repeat;
+    color: var(--fg);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main, footer {
+    max-width: 62ch;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem);
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.4rem;
+  }
+
+  .effective {
+    margin: 0 0 2.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 2.5rem 0 0.6rem;
+  }
+
+  p { margin: 0 0 1rem; color: var(--mist); }
+
+  ul { margin: 0 0 1rem; padding-left: 1.2rem; color: var(--mist); }
+
+  li { margin-bottom: 0.4rem; }
+
+  a { color: var(--bolt); }
+
+  .mark {
+    display: block;
+    width: 2rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--bolt);
+    opacity: 0.85;
+    margin-bottom: 2.5rem;
+  }
+
+  footer {
+    margin-top: 4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+</style>
+</head>
+<body>
+  <main>
+    <span class="mark"></span>
+    <h1>Privacy</h1>
+    <p class="effective">Effective 23 October 2026</p>
+
+    <p>Skua has no servers, no accounts, and no analytics. We do not collect, receive, or store
+      anything about you. The app talks directly to public weather sources from your phone, and
+      this page lists what each one receives.</p>
+
+    <h2>What leaves your phone</h2>
+    <ul>
+      <li>Apple Weather and Open-Meteo receive the coordinates of the place you are viewing, to
+        return its forecast, air quality, marine, and lightning data. Open-Meteo also receives the
+        text you type into place search.</li>
+      <li>The National Weather Service receives coordinates for severe alerts. NOAA Tides and
+        Currents receives only the ID of the nearest tide station, which the app picks on the
+        device.</li>
+      <li>Pollen.com receives a five-digit ZIP code. Apple's geocoder turns your coordinates into
+        that ZIP on the device.</li>
+      <li>RainViewer and the NOAA aurora feed receive no location. Wikipedia receives only
+        today's date.</li>
+    </ul>
+    <p>Each of these services handles requests under its own privacy policy.</p>
+
+    <h2>What stays on your phone</h2>
+    <ul>
+      <li>Your saved places, plans, dashboard layouts, and settings.</li>
+      <li>Your household list and the allergens you enter for each person.</li>
+      <li>Calendar events. With your permission, Skua reads your next event to check its weather
+        and never sends it anywhere.</li>
+      <li>The skua's voice. Every line comes from a bank built into the app.</li>
+    </ul>
+
+    <h2>Tracking</h2>
+    <ul>
+      <li>No accounts and no sign-in.</li>
+      <li>No analytics, telemetry, crash reporting, or advertising.</li>
+      <li>No cookies and no device fingerprinting.</li>
+    </ul>
+
+    <h2>Children</h2>
+    <p>Skua gathers no personal information from anyone of any age. It is not directed at
+      children.</p>
+
+    <h2>Changes</h2>
+    <p>If Skua ever adds a hosted service, this page will describe exactly what it does before it
+      ships.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about privacy: <a href="https://github.com/dcadolph/skua/issues">open an issue on
+      GitHub</a>.</p>
+  </main>
+  <footer><a href="/">Skua</a></footer>
+</body>
+</html>
