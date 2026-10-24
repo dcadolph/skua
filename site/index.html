@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skua</title>
-<meta name="description" content="Skua is a free, open source weather app for iPhone with a bird that reads your day. No ads, no accounts, no paid tier. Still in progress.">
+<meta name="description" content="Skua is a free, open source weather app for iPhone that reads your day, watches for rain, and comes with a bird that has opinions. No ads, no accounts. Still in progress.">
 <meta property="og:title" content="Skua">
 <meta property="og:description" content="Your fowl-weather friend. A free, open source weather app for iPhone, still in progress.">
 <meta property="og:type" content="website">
@@ -15,7 +15,6 @@
 <style>
   :root {
     --bg: #0e1114;
-    --bg-glow: #0e1114;
     --panel: #171c22;
     --line: #262d35;
     --fg: #ece6d3;
@@ -23,13 +22,13 @@
     --dim: #8c9096;
     --sky: #86b9d6;
     --on-sky: #0c1218;
+    --dawn: #3a2320;
     --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   }
 
   @media (prefers-color-scheme: light) {
     :root {
       --bg: #f2eddd;
-      --bg-glow: #f8f5ea;
       --panel: #e9e3d0;
       --line: #d6cfb8;
       --fg: #1c2025;
@@ -37,6 +36,7 @@
       --dim: #62666b;
       --sky: #2d6385;
       --on-sky: #ffffff;
+      --dawn: #f1d9c4;
     }
   }
 
@@ -47,8 +47,6 @@
   body {
     margin: 0;
     background: var(--bg);
-    background-image: radial-gradient(ellipse 80% 36rem at 80% 0%, var(--bg-glow), var(--bg) 70%);
-    background-repeat: no-repeat;
     color: var(--fg);
     font-family: ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
     font-size: 17px;
@@ -64,8 +62,13 @@
     padding: 0 16px;
   }
 
+  .top {
+    background: linear-gradient(180deg, var(--dawn) 0%, var(--bg) 100%);
+  }
+
   .topnav {
     display: flex;
+    justify-content: flex-end;
     gap: 0.75rem;
     padding: 1.25rem 0 0;
   }
@@ -79,59 +82,55 @@
     text-decoration: none;
   }
 
-  .topnav a:hover { border-color: var(--accent, currentColor); color: var(--fg); }
+  .topnav a:hover { border-color: var(--sky); color: var(--fg); }
 
   header.hero {
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: 2rem;
-    padding: 4rem 0 3rem;
+    gap: 3rem;
+    padding: 3rem 0 4.5rem;
     animation: rise 1.1s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   }
 
   @media (min-width: 52rem) {
-    header.hero { grid-template-columns: 1.1fr 1fr; padding: 5rem 0 4rem; }
+    header.hero { grid-template-columns: 1.15fr 1fr; padding: 4rem 0 5.5rem; }
   }
 
-  .hero-art {
-    justify-self: center;
-    width: min(440px, 88vw);
-    height: auto;
-    border-radius: 28px;
-    background: #0e1114;
+  .eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
   }
+
+  .eyebrow strong { color: var(--fg); letter-spacing: 0.16em; }
 
   h1 {
     margin: 0;
+    max-width: 14ch;
     font-family: var(--serif);
-    font-size: clamp(3rem, 2rem + 4vw, 5rem);
+    font-size: clamp(2.6rem, 1.8rem + 3.4vw, 4.4rem);
     font-weight: 600;
     letter-spacing: -0.02em;
-    line-height: 1;
+    line-height: 1.04;
   }
 
   .lede {
     margin: 1.25rem 0 0;
-    max-width: 30ch;
-    font-family: var(--serif);
-    font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
-    line-height: 1.35;
-    color: var(--fg);
+    max-width: 34ch;
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--mist);
   }
 
   .quip {
-    margin: 1rem 0 0;
+    margin: 0.9rem 0 0;
+    font-family: var(--serif);
     font-style: italic;
-    color: var(--dim);
-  }
-
-  .status {
-    margin: 1.5rem 0 0;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--dim);
+    font-size: 1.1rem;
+    color: var(--fg);
   }
 
   .actions {
@@ -159,104 +158,253 @@
 
   .button:hover { border-color: var(--sky); }
 
+  .status {
+    display: inline-block;
+    margin: 1.5rem 0 0;
+    padding: 0.45rem 0.9rem;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--mist);
+  }
+
+  .status strong { color: var(--fg); font-weight: 600; }
+
+  .phone-wrap {
+    position: relative;
+    justify-self: center;
+    width: min(300px, 78vw);
+  }
+
+  .phone {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 48px;
+    background: #050607;
+    box-shadow: 0 0 0 1px #2c3238, 0 30px 70px rgba(0, 0, 0, 0.45);
+  }
+
+  .phone img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 38px;
+  }
+
+  .perch {
+    position: absolute;
+    left: -54px;
+    bottom: 64px;
+    width: 108px;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  @media (max-width: 30rem) {
+    .perch { left: -18px; width: 80px; }
+  }
+
+  .shot-note {
+    margin: 0.9rem 0 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--dim);
+  }
+
   section {
-    padding: 3.5rem 0;
+    padding: 4.5rem 0;
     border-top: 1px solid var(--line);
   }
 
   h2 {
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.75rem;
     font-family: var(--serif);
-    font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem);
+    font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem);
     font-weight: 600;
     letter-spacing: -0.01em;
+    line-height: 1.15;
   }
 
   .intro {
     margin: 0 0 2rem;
-    max-width: none;
+    max-width: 42rem;
     color: var(--mist);
   }
 
-  .grid, .proofs {
+  .story {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    align-items: center;
+    gap: 3rem;
   }
 
-  @media (min-width: 40rem) {
-    .grid, .proofs { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 52rem) {
+    .story { grid-template-columns: 1fr 1.2fr; }
   }
 
-  @media (min-width: 64rem) {
-    .grid, .proofs { grid-template-columns: repeat(4, 1fr); }
-  }
-
-  .proofs {
+  .points {
     margin: 0;
-    padding: 1.5rem 0;
-    border-top: 1px solid var(--line);
-    counter-reset: proof;
-  }
-
-  .proof { counter-increment: proof; }
-
-  .proof::before {
-    content: "0" counter(proof);
-    display: block;
-    margin-bottom: 0.3rem;
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    color: var(--sky);
-  }
-
-  .proof strong {
-    display: block;
-    font-family: var(--serif);
-    font-size: 1.15rem;
-    font-weight: 600;
-  }
-
-  .proof span {
-    font-size: 0.92rem;
-    color: var(--mist);
-  }
-
-  .card {
-    background: var(--panel);
-    border-radius: 8px;
-    border-top: 3px solid var(--sky);
-    padding: 1.25rem 1.35rem 1.4rem;
-  }
-
-  .card h3 {
-    margin: 0 0 0.45rem;
-    font-family: var(--serif);
-    font-size: 1.12rem;
-    font-weight: 600;
-  }
-
-  .card p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--mist);
-  }
-
-  .levels {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0 0 2rem;
     padding: 0;
     list-style: none;
   }
 
-  .levels li {
-    padding: 0.35rem 1rem;
-    background: var(--panel);
-    border-radius: 6px;
+  .points li {
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .points li:first-child { border-top: none; padding-top: 0; }
+
+  .points strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .points span { color: var(--mist); }
+
+  /* The night and rain bands keep their own dark palette in both color schemes. */
+  .night, .rain {
+    --fg: #ece6d3;
+    --mist: #b9bcc2;
+    --dim: #8c9096;
+    --line: #2a3240;
+    --panel: #18202b;
+    --sky: #86b9d6;
+    --on-sky: #0c1218;
+    color: var(--fg);
+    border-top: none;
+  }
+
+  .night {
+    background-color: #0b1020;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 18%, #fff8 50%, transparent 51%),
+      radial-gradient(1px 1px at 28% 72%, #fff7 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 46% 30%, #fff6 50%, transparent 51%),
+      radial-gradient(1px 1px at 64% 12%, #fff8 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 78% 58%, #fff6 50%, transparent 51%),
+      radial-gradient(1px 1px at 90% 26%, #fff7 50%, transparent 51%),
+      radial-gradient(1px 1px at 6% 88%, #fff6 50%, transparent 51%),
+      radial-gradient(1px 1px at 54% 90%, #fff5 50%, transparent 51%),
+      linear-gradient(180deg, #0b1020 0%, #141c33 100%);
+  }
+
+  .rain {
+    background-color: #1a222c;
+    background-image:
+      repeating-linear-gradient(105deg, transparent 0 22px, rgba(160, 190, 215, 0.05) 22px 23px),
+      linear-gradient(180deg, #1d2631 0%, #121820 100%);
+  }
+
+  .voice {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 52rem) {
+    .voice { grid-template-columns: 1fr 1.3fr; }
+  }
+
+  .dial {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+  }
+
+  .dial button {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--mist);
+    font: inherit;
     font-family: var(--serif);
     font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .dial button:hover { color: var(--fg); border-color: var(--sky); }
+
+  .dial button[aria-pressed="true"] {
+    background: var(--sky);
+    border-color: var(--sky);
+    color: var(--on-sky);
+  }
+
+  .dial button:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+
+  .dial.small button { font-family: inherit; font-size: 0.85rem; padding: 0.3rem 0.85rem; }
+
+  .speaker {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-end;
+  }
+
+  .speaker img {
+    flex: none;
+    width: 96px;
+    height: auto;
+    border-radius: 22px;
+  }
+
+  .bubble {
+    position: relative;
+    flex: 1;
+    min-height: 7.5rem;
+    margin: 0;
+    padding: 1.25rem 1.4rem;
+    border-radius: 18px 18px 18px 4px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    font-family: var(--serif);
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+    line-height: 1.4;
+  }
+
+  .fine {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    color: var(--dim);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 40rem) {
+    .gallery { grid-template-columns: repeat(2, 1fr); column-gap: 2.5rem; }
+  }
+
+  @media (min-width: 64rem) {
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .gallery li {
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+    color: var(--mist);
+  }
+
+  .gallery strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    font-weight: 600;
     color: var(--fg);
   }
 
@@ -289,7 +437,6 @@
     margin: 1rem 0 0;
     font-size: 0.92rem;
     color: var(--dim);
-    max-width: none;
   }
 
   footer {
@@ -321,146 +468,129 @@
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <nav class="topnav">
-      <a href="https://github.com/dcadolph/skua">GitHub</a>
-      <a href="privacy.html">Privacy</a>
-    </nav>
-    <header class="hero">
-      <div class="hero-text">
-        <h1>Skua</h1>
-        <p class="lede">Your fowl-weather friend. A weather app for iPhone with a bird that reads
-          your day.</p>
-        <p class="quip">"Forgot my umbrella. Be there shortly."</p>
-        <p class="status">Free and open source. Still a work in progress.</p>
-        <div class="actions">
-          <a class="button primary" href="https://github.com/dcadolph/skua">Source on GitHub</a>
-          <a class="button" href="#status">Where it stands</a>
+  <div class="top">
+    <div class="wrap">
+      <nav class="topnav">
+        <a href="https://github.com/dcadolph/skua">GitHub</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+      <header class="hero">
+        <div class="hero-text">
+          <p class="eyebrow"><strong>Skua</strong> &middot; iPhone &middot; open source</p>
+          <h1>Weather that reads your day.</h1>
+          <p class="lede">A forecast that tells you when to be out, watches for rain, and comes with
+            a bird that has opinions.</p>
+          <p class="quip">Your fowl-weather friend.</p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/dcadolph/skua">Follow development</a>
+            <a class="button" href="#voice">Hear the bird</a>
+          </div>
+          <p class="status"><strong>TestFlight beta coming.</strong> Free, open source, no ads, no
+            accounts.</p>
         </div>
-      </div>
-      <img class="hero-art" src="skua-logo.png" alt="Skua, a chunky seabird with a white wing flash">
-    </header>
-
-    <div class="proofs">
-      <div class="proof"><strong>Reads your day</strong><span>Flight Plan turns the forecast into when to be out and what to watch for.</span></div>
-      <div class="proof"><strong>Rain to the minute</strong><span>A two-hour chart shows when rain starts and stops.</span></div>
-      <div class="proof"><strong>No server, no ads</strong><span>The app calls each source from your phone. No accounts.</span></div>
-      <div class="proof"><strong>A bird with opinions</strong><span>Five voice levels, all built in, working offline.</span></div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <img src="shot-day.jpg" width="603" height="1311"
+              alt="Skua's forecast screen for Sydney: 73 degrees and clear under a warm evening sky, with a Flight Plan that says it is genuinely gorgeous around 7 PM.">
+          </div>
+          <img class="perch" src="skua-logo.png" alt="">
+          <p class="shot-note">Simulator screenshot of the current build.</p>
+        </div>
+      </header>
     </div>
+  </div>
 
-    <section>
-      <h2>The forecast, read for you</h2>
-      <p class="intro">Skua shows the numbers, then tells you what they mean for the day you
-        actually have.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>Flight plan</h3>
-          <p>Reads the day as a plan instead of a forecast: when to be out and what to watch for.
-            With your permission it checks the weather for your next calendar event.</p>
-        </div>
-        <div class="card">
-          <h3>The week ahead</h3>
-          <p>Each upcoming day gets a one-word character and a grade, so you can see which day to
-            bank on, plus the most comfortable daylight hour to be out.</p>
-        </div>
-        <div class="card">
-          <h3>Your plans on the forecast</h3>
-          <p>Add a run, ride, camp, or trip with a time and place, and the bird gives its read on
-            that window.</p>
-        </div>
-        <div class="card">
-          <h3>Rain to the minute</h3>
-          <p>When rain is close, a chart of the next two hours shows when it starts and stops.</p>
+  <section class="night">
+    <div class="wrap story">
+      <div class="phone-wrap">
+        <div class="phone">
+          <img src="shot-night.jpg" width="603" height="1311" loading="lazy"
+            alt="Skua at night in Seattle: a star field and crescent moon behind 43 degrees, and a Flight Plan that reads calm and dull, in the best way.">
         </div>
       </div>
-    </section>
+      <div>
+        <h2>The forecast, read for you.</h2>
+        <p class="intro">Skua shows the numbers, then tells you what they mean for the day you
+          actually have. The sky behind them follows the weather, down to the stars on a clear
+          night.</p>
+        <ul class="points">
+          <li><strong>Flight Plan</strong><span>One line on how the day goes, then the hours that
+            matter: golden light, the best time to be out, the peak heat, when trouble
+            brews.</span></li>
+          <li><strong>Your plans, checked</strong><span>Add a run, ride, or trip with a time and
+            place and the bird reads that window. With your permission it checks your next
+            calendar event too.</span></li>
+          <li><strong>Rain to the minute</strong><span>When rain is close, a two-hour chart shows
+            when it starts and stops.</span></li>
+          <li><strong>The week ahead</strong><span>Each day gets a one-word character and a grade,
+            so you can see which day to bank on.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <section>
-      <h2>Made to be glanced at</h2>
-      <p class="intro">One look at the screen tells you the weather before you read a number.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>A sky that matches</h3>
-          <p>The backdrop follows the weather: a condition-driven sky, a real sun or moon, a star field on clear nights, and falling rain or snow when it comes. The skua perches on the hills in front.</p>
+  <section class="rain" id="voice">
+    <div class="wrap voice">
+      <div>
+        <h2>A bird with opinions.</h2>
+        <p class="intro">The skua comments on the weather on screen. Pick how it talks to you.
+          Every line ships inside the app, so the voice works offline and sends nothing
+          anywhere.</p>
+        <p class="fine">Salty swears. Feral is for grown-ups.</p>
+      </div>
+      <div>
+        <div class="dial small" role="group" aria-label="Weather">
+          <button type="button" data-sky="rain" aria-pressed="true">Raining</button>
+          <button type="button" data-sky="clear" aria-pressed="false">Clear, 72&deg;</button>
         </div>
-        <div class="card">
-          <h3>Instrument panel</h3>
-          <p>Circular gauges for the bounded readings, tiles for the rest, and a pressure trend read from the hourly series.</p>
+        <div class="dial" role="group" aria-label="Voice level">
+          <button type="button" data-level="dry" aria-pressed="true">Dry</button>
+          <button type="button" data-level="proper" aria-pressed="false">Proper</button>
+          <button type="button" data-level="sassy" aria-pressed="false">Sassy</button>
+          <button type="button" data-level="salty" aria-pressed="false">Salty</button>
+          <button type="button" data-level="feral" aria-pressed="false">Feral</button>
         </div>
-        <div class="card">
-          <h3>High scores</h3>
-          <p>The Skua tab keeps lifetime stats on your phone: days used, cities checked, and the hottest, coldest, gustiest, and highest-UV readings you have seen.</p>
-        </div>
-        <div class="card">
-          <h3>Pick your bird</h3>
-          <p>Three app icons to choose from in settings: Cloud Perch, Sky Punch, and Ember.</p>
+        <div class="speaker">
+          <img src="skua-logo.png" alt="">
+          <p class="bubble" id="line" aria-live="polite">Wet out there. Steady, not dramatic. The
+            jacket by the door earns its keep today.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <h2>A bird with opinions</h2>
-      <p class="intro">The skua comments on the conditions the screen is showing and on your next
-        calendar event. Pick how it talks to you. Every line comes from a bank built into the app, so the
-        voice works offline and sends nothing anywhere.</p>
-      <ul class="levels">
-        <li>Dry</li>
-        <li>Proper</li>
-        <li>Sassy</li>
-        <li>Salty</li>
-        <li>Feral</li>
+  <section>
+    <div class="wrap">
+      <h2>Everything else you expect.</h2>
+      <p class="intro">Add the cards you care about, arrange them, and save named layouts to
+        switch between.</p>
+      <ul class="gallery">
+        <li><strong>Hourly and daily</strong>Graph any hourly series across 48 hours, plus a week
+          of highs and lows.</li>
+        <li><strong>Radar</strong>Animated radar and satellite on a map, with a timeline you can
+          scrub.</li>
+        <li><strong>Severe alerts</strong>National Weather Service warnings, with optional
+          notifications.</li>
+        <li><strong>Lightning</strong>A graded read on near-term storm and strike risk.</li>
+        <li><strong>Air and pollen</strong>Air quality and pollen, with allergen callouts for each
+          person in your household.</li>
+        <li><strong>Coast and sky</strong>Tides, marine conditions, aurora, the sun's arc, and the
+          moon phase.</li>
+        <li><strong>Many places</strong>Save every location that matters and switch between
+          them.</li>
+        <li><strong>Widgets</strong>Home Screen and Lock Screen widgets, including a Flight Plan
+          widget.</li>
+        <li><strong>High scores</strong>Lifetime stats on your phone: the hottest, coldest, and
+          gustiest days you have seen.</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <h2>Everything on one dashboard</h2>
-      <p class="intro">Add the cards you care about, arrange them, and save named layouts to switch
-        between.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>Hourly and daily</h3>
-          <p>Graph any hourly series across the next 48 hours with hold and drag, plus a week of
-            highs and lows with range bars.</p>
-        </div>
-        <div class="card">
-          <h3>Radar</h3>
-          <p>Animated radar on a map with a timeline you can scrub.</p>
-        </div>
-        <div class="card">
-          <h3>Severe alerts</h3>
-          <p>Official National Weather Service warnings, with optional notifications for severe
-            weather.</p>
-        </div>
-        <div class="card">
-          <h3>Lightning</h3>
-          <p>A graded read on near-term storm and strike risk.</p>
-        </div>
-        <div class="card">
-          <h3>Air and pollen</h3>
-          <p>Air quality and pollen levels, with per-person allergen callouts for your household.
-            The household list stays on your phone.</p>
-        </div>
-        <div class="card">
-          <h3>Coast and sky</h3>
-          <p>Tides from the nearest station, marine conditions, aurora visibility, the sun's arc,
-            and the moon phase.</p>
-        </div>
-        <div class="card">
-          <h3>Many places</h3>
-          <p>Save every location that matters and switch between them.</p>
-        </div>
-        <div class="card">
-          <h3>Widgets</h3>
-          <p>Home Screen and Lock Screen widgets, including a configurable forecast widget and a
-            dedicated Flight Plan widget.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Where the data comes from</h2>
-      <p class="intro">Skua has no server of its own. The app calls each source directly from your
-        phone through a shared Go core.</p>
+  <section>
+    <div class="wrap">
+      <h2>Where the data comes from.</h2>
+      <p class="intro">Skua has no server of its own. The app calls each source directly from
+        your phone through a shared Go core.</p>
       <table>
         <thead>
           <tr><th>Data</th><th>Source</th></tr>
@@ -478,16 +608,18 @@
         </tbody>
       </table>
       <p class="note">Severe alerts, tides, and pollen cover the United States only.</p>
-    </section>
+    </div>
+  </section>
 
-    <section id="status">
-      <h2>Where it stands</h2>
+  <section id="status">
+    <div class="wrap">
+      <h2>Where it stands.</h2>
       <p class="intro">Skua is free under the Apache 2.0 license, with no ads, no accounts, and no
         paid tier. It is not available to download yet. A TestFlight beta is the next step, and
         this page will say so when it opens. Until then, the code is on GitHub and builds with
         Xcode and gomobile. It requires iOS 17 or later.</p>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <footer>
     <div class="wrap">
@@ -500,5 +632,42 @@
       <p>Skua is free, open source, and a work in progress.</p>
     </div>
   </footer>
+
+  <script>
+    // Lines are copied from the app's voice bank, one per weather and level.
+    const lines = {
+      rain: {
+        dry: "Wet out there. Steady, not dramatic. The jacket by the door earns its keep today.",
+        proper: "Rain at the moment. Take an umbrella.",
+        sassy: "It is raining. Your hair had plans. The sky disagrees.",
+        salty: "Wet as hell today. Quit stalling and grab the jacket.",
+        feral: "The sky has a full bladder and zero shame. Umbrella, unless getting soaked is your thing. No judgment. Some.",
+      },
+      clear: {
+        dry: "Not a cloud, 72°. Take the family out in it, these are the ones you remember.",
+        proper: "Clear skies and 72°. A fine day to be outside.",
+        sassy: "72° and cloudless. Your excuses just evaporated.",
+        salty: "72°, pure sun. Quit reading forecasts and go live.",
+        feral: "Not a single cloud. The sky is completely naked at 72° and loving the attention. Go stare, it wants you to.",
+      },
+    };
+    const state = { sky: "rain", level: "dry" };
+    const out = document.getElementById("line");
+
+    function pick(attr, value) {
+      document.querySelectorAll(`[data-${attr}]`).forEach((b) => {
+        b.setAttribute("aria-pressed", String(b.dataset[attr] === value));
+      });
+      state[attr] = value;
+      out.textContent = lines[state.sky][state.level];
+    }
+
+    document.querySelectorAll("[data-sky]").forEach((b) => {
+      b.addEventListener("click", () => pick("sky", b.dataset.sky));
+    });
+    document.querySelectorAll("[data-level]").forEach((b) => {
+      b.addEventListener("click", () => pick("level", b.dataset.level));
+    });
+  </script>
 </body>
 </html>
