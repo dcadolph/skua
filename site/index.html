@@ -14,28 +14,29 @@
 <link rel="apple-touch-icon" href="skua-logo.png">
 <style>
   :root {
-    --bg: #060709;
-    --bg-glow: #12141a;
-    --panel: #0e1014;
-    --line: #22252c;
-    --fg: #eef1f4;
-    --mist: #aab1ba;
-    --dim: #8a919b;
-    --bolt: #ff7f32;
-    --on-bolt: #160a02;
+    --bg: #0e1114;
+    --bg-glow: #0e1114;
+    --panel: #171c22;
+    --line: #262d35;
+    --fg: #ece6d3;
+    --mist: #b4b6b0;
+    --dim: #8c9096;
+    --sky: #86b9d6;
+    --on-sky: #0c1218;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   }
 
   @media (prefers-color-scheme: light) {
     :root {
-      --bg: #f4f5f7;
-      --bg-glow: #ffffff;
-      --panel: #fbfbfc;
-      --line: #dfe2e7;
-      --fg: #17181c;
-      --mist: #454a52;
-      --dim: #626872;
-      --bolt: #c4520f;
-      --on-bolt: #ffffff;
+      --bg: #f2eddd;
+      --bg-glow: #f8f5ea;
+      --panel: #e9e3d0;
+      --line: #d6cfb8;
+      --fg: #1c2025;
+      --mist: #474b50;
+      --dim: #62666b;
+      --sky: #2d6385;
+      --on-sky: #ffffff;
     }
   }
 
@@ -46,16 +47,16 @@
   body {
     margin: 0;
     background: var(--bg);
-    background-image: radial-gradient(ellipse 90% 40rem at 50% 0%, var(--bg-glow), var(--bg) 70%);
+    background-image: radial-gradient(ellipse 80% 36rem at 80% 0%, var(--bg-glow), var(--bg) 70%);
     background-repeat: no-repeat;
     color: var(--fg);
     font-family: ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
-  a { color: var(--bolt); text-underline-offset: 0.18em; }
+  a { color: var(--sky); text-underline-offset: 0.18em; }
 
   .wrap {
     max-width: 68rem;
@@ -64,54 +65,53 @@
   }
 
   header.hero {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
-    text-align: center;
-    padding: 4.5rem 0 3.5rem;
+    gap: 2rem;
+    padding: 4rem 0 3rem;
     animation: rise 1.1s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   }
 
-  .hero img {
-    width: min(240px, 60vw);
-    height: auto;
+  @media (min-width: 52rem) {
+    header.hero { grid-template-columns: 1.1fr 1fr; padding: 5rem 0 4rem; }
   }
 
-  .mark {
-    display: block;
-    width: 2rem;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--bolt);
-    opacity: 0.85;
-    margin: 1.5rem auto 1.75rem;
+  .hero-art {
+    justify-self: center;
+    width: min(440px, 88vw);
+    height: auto;
+    border-radius: 28px;
+    background: #0e1114;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2.4rem, 1.8rem + 2.6vw, 3.6rem);
-    font-weight: 680;
+    font-family: var(--serif);
+    font-size: clamp(3rem, 2rem + 4vw, 5rem);
+    font-weight: 600;
     letter-spacing: -0.02em;
-    line-height: 1.1;
+    line-height: 1;
   }
 
   .lede {
-    margin: 1rem 0 0;
-    max-width: 34ch;
-    font-size: clamp(1.15rem, 1rem + 0.8vw, 1.45rem);
-    color: var(--mist);
-    text-wrap: balance;
+    margin: 1.25rem 0 0;
+    max-width: 30ch;
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+    line-height: 1.35;
+    color: var(--fg);
   }
 
   .quip {
-    margin: 1.25rem 0 0;
+    margin: 1rem 0 0;
     font-style: italic;
     color: var(--dim);
   }
 
   .status {
-    margin: 1.75rem 0 0;
-    font-size: 0.82rem;
+    margin: 1.5rem 0 0;
+    font-size: 0.8rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--dim);
@@ -120,28 +120,27 @@
   .actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 0.75rem;
-    margin-top: 2rem;
+    margin-top: 1.75rem;
   }
 
   .button {
     display: inline-block;
-    padding: 0.7rem 1.25rem;
-    border-radius: 999px;
+    padding: 0.7rem 1.3rem;
+    border-radius: 8px;
     border: 1px solid var(--line);
     color: var(--fg);
     text-decoration: none;
-    font-weight: 550;
+    font-weight: 560;
   }
 
   .button.primary {
-    background: var(--bolt);
-    border-color: var(--bolt);
-    color: var(--on-bolt);
+    background: var(--sky);
+    border-color: var(--sky);
+    color: var(--on-sky);
   }
 
-  .button:hover { border-color: var(--bolt); }
+  .button:hover { border-color: var(--sky); }
 
   section {
     padding: 3.5rem 0;
@@ -149,15 +148,16 @@
   }
 
   h2 {
-    margin: 0 0 0.5rem;
-    font-size: clamp(1.45rem, 1.2rem + 1vw, 1.9rem);
-    font-weight: 640;
+    margin: 0 0 0.6rem;
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem);
+    font-weight: 600;
     letter-spacing: -0.01em;
   }
 
   .intro {
     margin: 0 0 2rem;
-    max-width: 62ch;
+    max-width: none;
     color: var(--mist);
   }
 
@@ -175,17 +175,29 @@
     .grid, .proofs { grid-template-columns: repeat(4, 1fr); }
   }
 
-  .proofs { margin: 0 0 3.5rem; }
+  .proofs {
+    margin: 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--line);
+    counter-reset: proof;
+  }
 
-  .proof {
-    padding: 0.2rem 0 0.2rem 1rem;
-    border-left: 2px solid var(--bolt);
+  .proof { counter-increment: proof; }
+
+  .proof::before {
+    content: "0" counter(proof);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--sky);
   }
 
   .proof strong {
     display: block;
-    font-size: 1.05rem;
-    font-weight: 620;
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
   }
 
   .proof span {
@@ -195,15 +207,16 @@
 
   .card {
     background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 1.25rem 1.35rem;
+    border-radius: 8px;
+    border-top: 3px solid var(--sky);
+    padding: 1.25rem 1.35rem 1.4rem;
   }
 
   .card h3 {
-    margin: 0 0 0.4rem;
-    font-size: 1.02rem;
-    font-weight: 620;
+    margin: 0 0 0.45rem;
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    font-weight: 600;
   }
 
   .card p {
@@ -222,11 +235,12 @@
   }
 
   .levels li {
-    padding: 0.3rem 0.8rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 0.9rem;
-    color: var(--mist);
+    padding: 0.35rem 1rem;
+    background: var(--panel);
+    border-radius: 6px;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--fg);
   }
 
   table {
@@ -258,7 +272,7 @@
     margin: 1rem 0 0;
     font-size: 0.92rem;
     color: var(--dim);
-    max-width: 62ch;
+    max-width: none;
   }
 
   footer {
@@ -290,17 +304,18 @@
 <body>
   <div class="wrap">
     <header class="hero">
-      <img src="skua-logo.png" alt="Skua, a chunky seabird with a white wing flash">
-      <span class="mark"></span>
-      <h1>Skua</h1>
-      <p class="lede">Your fowl-weather friend. A weather app for iPhone with a bird that reads
-        your day.</p>
-      <p class="quip">"Forgot my umbrella. Be there shortly."</p>
-      <p class="status">Free and open source. Still a work in progress.</p>
-      <div class="actions">
-        <a class="button primary" href="https://github.com/dcadolph/skua">Source on GitHub</a>
-        <a class="button" href="#status">Where it stands</a>
+      <div class="hero-text">
+        <h1>Skua</h1>
+        <p class="lede">Your fowl-weather friend. A weather app for iPhone with a bird that reads
+          your day.</p>
+        <p class="quip">"Forgot my umbrella. Be there shortly."</p>
+        <p class="status">Free and open source. Still a work in progress.</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/dcadolph/skua">Source on GitHub</a>
+          <a class="button" href="#status">Where it stands</a>
+        </div>
       </div>
+      <img class="hero-art" src="skua-logo.png" alt="Skua, a chunky seabird with a white wing flash">
     </header>
 
     <div class="proofs">
