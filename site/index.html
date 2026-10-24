@@ -64,6 +64,23 @@
     padding: 0 16px;
   }
 
+  .topnav {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1.25rem 0 0;
+  }
+
+  .topnav a {
+    padding: 0.35rem 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--mist);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .topnav a:hover { border-color: var(--accent, currentColor); color: var(--fg); }
+
   header.hero {
     display: grid;
     grid-template-columns: 1fr;
@@ -280,11 +297,13 @@
     padding: 2rem 0 3rem;
     font-size: 0.9rem;
     color: var(--dim);
+    text-align: center;
   }
 
   footer nav {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.5rem 1.5rem;
     margin-bottom: 0.75rem;
   }
@@ -303,6 +322,10 @@
 </head>
 <body>
   <div class="wrap">
+    <nav class="topnav">
+      <a href="https://github.com/dcadolph/skua">GitHub</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
     <header class="hero">
       <div class="hero-text">
         <h1>Skua</h1>
