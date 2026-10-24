@@ -161,10 +161,36 @@
     color: var(--mist);
   }
 
-  .grid {
+  .grid, .proofs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  @media (min-width: 40rem) {
+    .grid, .proofs { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 64rem) {
+    .grid, .proofs { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .proofs { margin: 0 0 3.5rem; }
+
+  .proof {
+    padding: 0.2rem 0 0.2rem 1rem;
+    border-left: 2px solid var(--bolt);
+  }
+
+  .proof strong {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 620;
+  }
+
+  .proof span {
+    font-size: 0.92rem;
+    color: var(--mist);
   }
 
   .card {
@@ -276,6 +302,13 @@
         <a class="button" href="#status">Where it stands</a>
       </div>
     </header>
+
+    <div class="proofs">
+      <div class="proof"><strong>Reads your day</strong><span>Flight Plan turns the forecast into when to be out and what to watch for.</span></div>
+      <div class="proof"><strong>Rain to the minute</strong><span>A two-hour chart shows when rain starts and stops.</span></div>
+      <div class="proof"><strong>No server, no ads</strong><span>The app calls each source from your phone. No accounts.</span></div>
+      <div class="proof"><strong>A bird with opinions</strong><span>Five voice levels, all built in, working offline.</span></div>
+    </div>
 
     <section>
       <h2>The forecast, read for you</h2>
